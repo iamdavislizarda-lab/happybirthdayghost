@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>☕ Happy Birthday, Love!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #fff8f0;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      /* Mood gradient background */
+      background: linear-gradient(180deg, #4b2e05 0%, #7a5c41 50%, #cbb294 100%);
+    }
+
+    /* Overlay for rainy effect */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(50, 50, 70, 0.15);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: #fff8f0;
+      margin: 20px 0 10px;
+      z-index: 1;
+    }
+
+    /* Coffee cup */
+    .coffee-cup {
+      width: 180px;
+      height: 120px;
+      background: #c49a6c;
+      border-radius: 0 0 80px 80px;
+      position: relative;
+      box-shadow: inset 0 5px 0 #9e7b5f, 0 8px 20px rgba(0,0,0,0.25);
+      margin: 40px auto 10px auto;
+      z-index: 1;
+    }
+
+    /* Handle */
+    .coffee-cup::before {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 8px solid #c49a6c;
+      border-radius: 50%;
+      top: 20px;
+      right: -50px;
+      background: transparent;
+    }
+
+    /* Face */
+    .coffee-eye-left, .coffee-eye-right {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #000;
+      border-radius: 50%;
+      top: 50px;
+    }
+    .coffee-eye-left { left: 50px; }
+    .coffee-eye-right { right: 50px; }
+
+    /* Tear */
+    .coffee-tear {
+      position: absolute;
+      width: 6px;
+      height: 10px;
+      background: rgba(0,162,255,0.7);
+      border-radius: 50%;
+      top: 60px;
+      left: 50px;
+      animation: tearDrop 1s infinite;
+    }
+    @keyframes tearDrop {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(15px); opacity: 0; }
+    }
+
+    /* Smile */
+    .coffee-mouth {
+      position: absolute;
+      width: 60px;
+      height: 20px;
+      border-bottom: 4px solid black;
+      border-radius: 0 0 50px 50px;
+      top: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .steam {
+      position: relative;
+      width: 100%;
+      height: 80px;
+      margin-bottom: -60px;
+      z-index: 1;
+    }
+    .steam span {
+      position: absolute;
+      width: 4px;
+      height: 40px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      animation: rise 3s infinite ease-in-out;
+    }
+    .steam span:nth-child(1){ left: calc(50% - 20px); animation-delay:0s; }
+    .steam span:nth-child(2){ left: 50%; animation-delay:1s; }
+    .steam span:nth-child(3){ left: calc(50% + 20px); animation-delay:2s; }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity:1; }
+      100% { transform: translateY(-60px) scale(0.8); opacity:0; }
+    }
+
+    .note {
+      background: rgba(255, 255, 255, 0.85);
+      display: inline-block;
+      padding: 20px 30px;
+      border-radius: 15px;
+      margin-top: 10px;
+      max-width: 600px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      z-index: 1;
+    }
+    .note p {
+      font-size: 18px;
+      font-style: italic;
+      color: #5c3d2e;
+      line-height: 1.7;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #fff8f0;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    /* Broken hearts */
+    .heart {
+      position: fixed;
+      color: #ff4c4c; 
+      font-size: 24px; 
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(1); opacity:1; }
+      100% { transform: translateY(-10vh) scale(0.8); opacity:0; }
+    }
+
+    /* Rain */
+    .raindrop {
+      position: fixed;
+      width: 2px;
+      height: 20px; 
+      background: rgba(174,194,224,0.7); 
+      top: -20px;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); opacity:0.5; }
+      100% { transform: translateY(110vh); opacity:0; }
+    }
+
+    /* Lightning flash */
+    .flash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255,255,255,0.7); 
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1000;
+    }
+
+    button {
+      background: #4b2e05;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: 0.3s;
+      z-index: 1;
+    }
+    button:hover { background: #6d4c28; }
+  </style>
+</head>
+<body>
+  <div id="hearts"></div>
+  <div id="rain"></div>
+  <div class="flash" id="flash"></div>
+
+  <div class="steam"><span></span><span></span><span></span></div>
+  <div class="coffee-cup">
+    <div class="coffee-eye-left"></div>
+    <div class="coffee-eye-right"></div>
+    <div class="coffee-tear"></div>
+    <div class="coffee-mouth"></div>
+  </div>
+
+  <h1>☕ Happy Birthday, Love!</h1>
+
+  <div class="note">
+    <p>
+      Happy birthday, ghost! Hope you’re doing great wherever you’re haunting now 😂<br><br>
+      Just wanted to say... you still cross my mind more often than my morning coffee ☕<br>
+      Guess some flavors just stay — even when they’re gone 
+    </p>
+  </div>
+
+  <footer>— brewed with a little love, rain, and thunder 🌧️⚡💔</footer>
+
+  <!-- Play Music Button -->
+  <button id="playMusic">Play “Multo” by Cup of Joe 🎶</button>
+  <audio id="bgMusic" loop>
+    <source src="multo.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Broken hearts
+    const heartsContainer = document.getElementById("hearts");
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💔"; 
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 20 + 20) + "px"; 
+      heart.style.animationDuration = (Math.random() * 3 + 5) + "s"; 
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 400);
+
+    // Rain
+    const rainContainer = document.getElementById("rain");
+    function createRaindrop() {
+      const drop = document.createElement("div");
+      drop.classList.add("raindrop");
+      drop.style.left = Math.random() * 100 + "vw";
+      drop.style.width = (Math.random() * 2 + 2) + "px";
+      drop.style.height = (Math.random() * 15 + 20) + "px";
+      drop.style.animationDuration = (Math.random() * 1 + 0.8) + "s";
+      rainContainer.appendChild(drop);
+      setTimeout(() => drop.remove(), 2500);
+    }
+    setInterval(createRaindrop, 20);
+
+    // Lightning flash
+    const flash = document.getElementById("flash");
+    function lightning() {
+      flash.style.opacity = 0.7;
+      setTimeout(() => { flash.style.opacity = 0; }, 300);
+    }
+    setInterval(() => {
+      if(Math.random() < 0.07) lightning();
+    }, 500);
+
+    // Music play button
+    const btn = document.getElementById("playMusic");
+    const music = document.getElementById("bgMusic");
+    btn.addEventListener("click", () => {
+      music.play();
+      btn.textContent = "Now playing: Multo 🎧";
+      btn.disabled = true;
+    });
+  </script>
+</body>
+</html>
